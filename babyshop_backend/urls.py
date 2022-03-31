@@ -26,6 +26,7 @@ urlpatterns = [
     path("api/v1/product/<int:pk>/", views.ProductObjectApiView.as_view()),
     path("api/v1/category/", views.CategoryListApiView.as_view()),
     path("api/v1/product/category/<int:pk>/", views.ListProductCategory.as_view()),
+    path("api/v1/type/", views.TypeListApiView.as_view()),
 
 ]
 urlpatterns += static(settings.MEDIA_URL,

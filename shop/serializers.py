@@ -10,9 +10,14 @@ class CategorySerializers(serializers.ModelSerializer):
         fields = ("id", "title", "children")
 
 
-class ProductSerializer(serializers.ModelSerializer):
+class TypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Type
+        fields = "__all__"
 
+
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
 
-        fields = ("id","image","price", "title", "content", "category", "slug","stock")
+        fields = ("id", "image", "price", "title", "content", "category", "slug", "stock")

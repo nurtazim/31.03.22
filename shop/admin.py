@@ -20,12 +20,12 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django_mptt_admin.admin import DjangoMpttAdmin
-from .models import Product, Category
+from .models import Product, Category ,Type
 
 
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ["get_image", 'title', 'price', 'stock', 'available', ]
+    list_display = ["get_image", 'title', 'price', "type", 'stock', 'available', ]
     readonly_fields = ("get_image",)
 
     list_filter = ['available', 'category']
@@ -47,3 +47,5 @@ class CategoryAdmin(DjangoMpttAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Type)
+

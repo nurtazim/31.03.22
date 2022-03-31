@@ -1,1 +1,0 @@
-web: gunicorn young-escarpment-51210.wsgi --log-file -

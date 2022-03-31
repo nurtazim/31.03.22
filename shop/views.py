@@ -9,6 +9,10 @@ class ProductListApiView(ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+class TypeListApiView(ListCreateAPIView):
+    queryset = Type.objects.all()
+    serializer_class = TypeSerializer
+
 
 class ProductObjectApiView(RetrieveUpdateAPIView):
     queryset = Product.objects.all()

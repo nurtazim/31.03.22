@@ -55,12 +55,27 @@ def upload_to(instance, filename):
     return f'{filename}'
 
 
+class Type(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Названия типа одежды')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Тип одежды'
+        verbose_name_plural = 'Типы одежды'
+
+
+
 class Product(models.Model):
     image = models.ImageField(upload_to=upload_to, verbose_name="Изображение")
     title = models.CharField(max_length=100, verbose_name='Название')
     slug = models.SlugField(max_length=150)
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
-    category = TreeForeignKey('Category', on_delete=models.PROTECT, related_name='posts', verbose_name='Категория')
+    type = models.ForeignKey("Type",on_delete=models.CASCADE, verbose_name='Тип одежды', null=True,
+                             blank=True)
+
+    category = TreeForeignKey('Category',on_delete=models.PROTECT, related_name='posts', verbose_name='Категория')
     available = models.BooleanField(default=True, verbose_name="актуальность")
     content = models.TextField(verbose_name='Содержание')
     stock = models.PositiveIntegerField(verbose_name="Количество товара")
@@ -76,7 +91,7 @@ class Product(models.Model):
 
 class Category(MPTTModel):
     title = models.CharField(max_length=50, unique=True, verbose_name='Название')
-    parent = TreeForeignKey('self', on_delete=models.PROTECT, null=True, blank=True, related_name='children',
+    parent =TreeForeignKey('self', on_delete=models.PROTECT, null=True, blank=True, related_name='children',
                             db_index=True, verbose_name='Родительская категория')
     slug = models.SlugField()
 
